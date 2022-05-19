@@ -55,7 +55,7 @@ jobs:
             token: ${{ secrets.GITHUB_TOKEN }}
             version_regex: '([0-9]+\.[0-9]+\.[0-9]+)'
         - name: Build the tagged Docker image
-          run: docker build . --file Dockerfile --tag argocd:${{steps.customtag.outputs.tag}}
+          run: docker build . --file Dockerfile --tag chokkalingamk/argocd:${{steps.customtag.outputs.tag}}
         - name: Push the tagged Docker image
           run: docker push chokkalingamk/argocd:${{steps.customtag.outputs.tag}}
         # - name: Build the latest Docker image
