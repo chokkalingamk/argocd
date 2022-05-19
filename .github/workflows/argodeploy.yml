@@ -62,3 +62,4 @@ jobs:
         #   run: docker build . --file Dockerfile --tag chokkalingamk/argocd:latest
         # - name: Push the latest Docker image
         #   run: docker push chokkalingamk/argocd:latest
+        
