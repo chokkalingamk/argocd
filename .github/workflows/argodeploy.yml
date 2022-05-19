@@ -43,7 +43,7 @@ jobs:
     outputs:
       output1: ${{ steps.repo_var.outputs.var }}
     steps:
-        - uses: actions/checkout@v1
+        - uses: actions/checkout@v2
         - name: Login to DockerHub Registry
           run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
         # - name: Get the version
@@ -53,7 +53,8 @@ jobs:
           id: customtag
           with:
             token: ${{ secrets.GITHUB_TOKEN }}
-            version_regex: '([0-9]+\.[0-9]+\.[0-9]+)'
+            version_tag_prefix: 'v'
+            #version_regex: '([0-9]+\.[0-9]+\.[0-9]+)'
         - name: Build the tagged Docker image
           run: docker build . --file Dockerfile --tag chokkalingamk/argocd:${{steps.customtag.outputs.tag}}
         - name: Push the tagged Docker image
@@ -62,4 +63,3 @@ jobs:
         #   run: docker build . --file Dockerfile --tag chokkalingamk/argocd:latest
         # - name: Push the latest Docker image
         #   run: docker push chokkalingamk/argocd:latest
-        
